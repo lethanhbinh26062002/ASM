@@ -5,12 +5,18 @@
       "price": "123123121",
       "id": 2
     }
-  ], 
+  ],
   "users": [
     {
       "email": "lethanhbinh@gmail.com",
       "password": "12345",
       "id": 1
+    },
+    {
+      "name": "binh",
+      "email": "binh@gmail.com",
+      "password": "26062002",
+      "id": 2
     }
   ]
 }
