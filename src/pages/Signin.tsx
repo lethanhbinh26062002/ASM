@@ -31,7 +31,7 @@ const Signin = (props: Props) => {
               </div>
               <div className="mb-2">
               </div>
-              <div className="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.html" className="text-primary">Create</a>
+              <div className="text-center mt-4 font-weight-light"> Don't have an account? <Link to={`/signup`}>Register</Link>
               </div>
             </form>
           </div>

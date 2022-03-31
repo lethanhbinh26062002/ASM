@@ -1,12 +1,9 @@
 import React from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate ,Link} from 'react-router-dom';
+import { UserType } from '../types/User';
 
-type Inputs = {
-  name: string,
-  email: string,
-  password: string
-}
+type Inputs = UserType;
 type UserAddProps = {
   onAdd: (product: Inputs) => void
 }
@@ -47,7 +44,7 @@ const Signup = (props: UserAddProps) => {
                     <div className="mt-3">
                       <button className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" >SIGN UP</button>
                     </div>
-                    <div className="text-center mt-4 font-weight-light"> Already have an account?<a href="login.html" className="text-primary">Login</a>
+                    <div className="text-center mt-4 font-weight-light"> Already have an account?<Link to={`/signin`}>Login</Link>
                     </div>
                   </form>
                 </div>
