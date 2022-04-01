@@ -12,25 +12,29 @@ type FormInputs = ProductType;
 const ProductEdit = (props: ProductEditProps) => {
     const { register, handleSubmit, formState: {errors}, reset} = useForm<FormInputs>();
     const { id } = useParams();
+    console.log(id);
+    
     const navigate = useNavigate();
 
     useEffect(() => {
         const getProduct = async () => {
             const { data } = await read(id);
             reset(data);
+            console.log(data);
+            
         }
         getProduct();
     },[id]);
 
     const onSubmit: SubmitHandler<FormInputs> = (data) => {
         props.onUpdate(data)
-        navigate("/admin/product");
+        navigate("/admin/products");
     }
   return (
     <><div className="col-12 grid-margin stretch-card">
               <div className="card">
                   <div className="card-body">
-                      <h4 className="text-left card-title">Add Product</h4>
+                      <h4 className="text-left card-title">Edit Product</h4>
                       <br />
                       <form className="forms-sample" onSubmit={handleSubmit(onSubmit)}>
                           <div className="text-left form-group">

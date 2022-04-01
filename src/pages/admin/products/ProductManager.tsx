@@ -3,8 +3,13 @@ import { ProductType } from '../../../types/product';
 
 type ProductManagerProps = {
   products: ProductType[];
-  onRemove: (id: number) => void
+  onRemove: (_id: number|string) => void
 }
+
+  const userLocal = JSON.parse(localStorage.getItem("user") as string);
+  const UserId = userLocal.user._id;
+  console.log(UserId);
+  
 
 const ProductManager = (props: ProductManagerProps) => {
   return (
@@ -13,7 +18,7 @@ const ProductManager = (props: ProductManagerProps) => {
         <div className="card-body">
           <h4 className="card-title">List Product</h4>
           <button type="button" className="ml-0 btn btn-inverse-success btn-fw">
-            <Link to={`/admin/product/add`}>Add Product</Link>
+            <Link to={`/admin/products/${UserId}`}>Add Product</Link>
           </button>
           <table className="table table-bordered">
             <thead>
@@ -34,10 +39,10 @@ const ProductManager = (props: ProductManagerProps) => {
                   <td>{item.description}</td>
                   <td>
                     <button type="button" className="btn btn-inverse-dark btn-fw">
-                      <Link to={`/admin/product/${item.id}/edit`}>Edit</Link>
+                      <Link to={`/admin/products/${item._id}/edit`}>Edit</Link>
                     </button>
                     <span>                                                </span>
-                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item.id)}>Remove</button>
+                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item._id)}>Remove</button>
                   </td>
                 </tr>;
               })}

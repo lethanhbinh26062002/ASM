@@ -8,6 +8,14 @@ export const addUser = (user: any) => {
     const url = `/users`;
     return instance.post(url, user);
 }
+export const signup = (user: any) => {
+    const url = `/signup`;
+    return instance.post(url, user)   
+}
+export const signin = (user: any) => {
+    const url = `/signin`;
+    return instance.post(url, user)   
+}
 export const removeUser = (id: any) => {
     const url = `/users/${id}`;
     return instance.delete(url)

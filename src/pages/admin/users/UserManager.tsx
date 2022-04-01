@@ -3,7 +3,7 @@ import { UserType } from '../../../types/User';
 
 type UserManagerProps = {
   users: UserType[];
-  onRemove: (id: number) => void
+  onRemove: (_id: number) => void
 }
 
 const UserManager = (props: UserManagerProps) => {
@@ -32,10 +32,10 @@ const UserManager = (props: UserManagerProps) => {
                   <td>{item.email} </td>
                   <td>
                     <button type="button" className="btn btn-inverse-dark btn-fw">
-                      <Link to={`/admin/user/${item.id}/edit`}>Edit</Link>
+                      <Link to={`/admin/user/${item._id}/edit`}>Edit</Link>
                     </button>
                     <span>                                                </span>
-                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item.id)}>Remove</button>
+                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item._id)}>Remove</button>
                   </td>
                 </tr>;
               })}

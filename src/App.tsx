@@ -16,7 +16,7 @@ import ProductEdit from './pages/admin/products/ProductEdit';
 import PrivateRouter from './components/PrivateRouter';
 import Signup from './pages/Signup';
 import { UserType } from './types/User';
-import { addUser, removeUser } from './api/user';
+import { signup, removeUser } from './api/user';
 import Signin from './pages/Signin';
 import UserManager from './pages/admin/users/UserManager';
 
@@ -33,7 +33,7 @@ function App() {
   }, []);
   //User
   const onHandleAddUser = async (user: any) => {
-    const { data } = await addUser(user);
+    const { data } = await signup(user);
     setUsers([...users, data]);
   }
   const onHandleRemoveUser = async (id: number) => {
@@ -44,10 +44,10 @@ function App() {
     const { data } = await add(product);
     setProducts([...products, data]);
   }
-  const onHandleRemove = async (id: number) => {
-    remove(id);
+  const onHandleRemove = async (_id: number|string) => {
+    remove(_id);
     // rerender
-    setProducts(products.filter(item => item.id !== id));
+    setProducts(products.filter(item => item._id !== _id));
   }
   const onHandleUpdate = async (product: ProductType) => {
     try {
@@ -55,7 +55,7 @@ function App() {
       const { data } = await update(product);
       // reREnder - 
       // Tạo ra 1 vòng lặp, nếu item.id == id sản phẩm vừa cập nhật (data), thì cập nhật ngược lại giữ nguyên
-      setProducts(products.map(item => item.id === data.id ? product : item))
+      setProducts(products.map(item => item._id === data._id ? product : item))
     } catch (error) {
 
     }
@@ -70,7 +70,7 @@ function App() {
       </div>
       <main>
         <Routes>
-          <Route path="signup" element={<Signup onAdd={onHandleAddUser} />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="/" element={<WebsiteLayout />}>
             <Route index element={<HomePage products={products} />} />
@@ -82,10 +82,10 @@ function App() {
           <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="product">
+            <Route path="products">
               <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
               <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
-              <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
+              <Route path=":id" element={<ProductAdd onAdd={onHandleAdd} />} />
             </Route>
             <Route path="user">
               <Route index element={<UserManager users={users} onRemove={onHandleRemoveUser} />} />

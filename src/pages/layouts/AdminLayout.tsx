@@ -31,12 +31,12 @@ const AdminLayout = (props: Props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`product`}>
+                            <Link to={`products`}>
                                 <span className="nav-link menu-title">Products</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`user`}>
+                            <Link to={`users`}>
                                 <span className="nav-link menu-title">Users</span>
                             </Link>
                         </li>
