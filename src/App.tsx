@@ -10,7 +10,7 @@ import AdminLayout from './pages/layouts/AdminLayout';
 import WebsiteLayout from './pages/layouts/WebsiteLayout';
 import Dashboard from './pages/admin/Dashboard';
 import ProductManager from './pages/admin/products/ProductManager';
-import ProductDetail from './pages/admin/products/ProductDetail';
+import ProductDetail from './pages/ProductDetail';
 import ProductAdd from './pages/admin/products/ProductAdd';
 import ProductEdit from './pages/admin/products/ProductEdit';
 import PrivateRouter from './components/PrivateRouter';
@@ -41,11 +41,15 @@ function App() {
   }
   // Add Product
   const onHandleAdd = async (product: any) => {
+    // const userLocal = JSON.parse(localStorage.getItem("user") as string);
+    // const UserId = userLocal.user._id;
+    // console.log(UserId);
     const { data } = await add(product);
     setProducts([...products, data]);
   }
   const onHandleRemove = async (_id: number|string) => {
     remove(_id);
+    console.log(_id);
     // rerender
     setProducts(products.filter(item => item._id !== _id));
   }
@@ -75,7 +79,7 @@ function App() {
           <Route path="/" element={<WebsiteLayout />}>
             <Route index element={<HomePage products={products} />} />
             <Route path="product">
-              <Route index element={<ProductPage />} />
+              <Route index element={<ProductPage products={products} />} />
               <Route path=":id" element={<ProductDetail />} />
             </Route>
           </Route>'
@@ -84,8 +88,8 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="products">
               <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
-              <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
-              <Route path=":id" element={<ProductAdd onAdd={onHandleAdd} />} />
+              <Route path=":userId/:id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
+              <Route path=":userId" element={<ProductAdd onAdd={onHandleAdd} />} />
             </Route>
             <Route path="user">
               <Route index element={<UserManager users={users} onRemove={onHandleRemoveUser} />} />

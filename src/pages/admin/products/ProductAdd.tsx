@@ -14,7 +14,7 @@ const ProductAdd = (props: ProductAddProps) => {
   const onSubmit: SubmitHandler<Inputs> = (dataInput) => {
     props.onAdd(dataInput);
     // chuyển trang
-    navigate("/admin/product");
+    navigate("/admin/products");
   }
   return (
     <><div className="col-12 grid-margin stretch-card">
