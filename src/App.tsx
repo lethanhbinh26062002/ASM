@@ -16,8 +16,9 @@ import ProductEdit from './pages/admin/products/ProductEdit';
 import PrivateRouter from './components/PrivateRouter';
 import Signup from './pages/Signup';
 import { UserType } from './types/User';
-import { addUser } from './api/user';
+import { addUser, removeUser } from './api/user';
 import Signin from './pages/Signin';
+import UserManager from './pages/admin/users/UserManager';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -30,15 +31,18 @@ function App() {
     }
     getProducts();
   }, []);
-
+  //User
+  const onHandleAddUser = async (user: any) => {
+    const { data } = await addUser(user);
+    setUsers([...users, data]);
+  }
+  const onHandleRemoveUser = async (id: number) => {
+    removeUser(id);
+  }
   // Add Product
   const onHandleAdd = async (product: any) => {
     const { data } = await add(product);
     setProducts([...products, data]);
-  }
-  const onHandleAddUser = async (user: any) => {
-    const { data } = await addUser(user);
-    setUsers([...users, data]);
   }
   const onHandleRemove = async (id: number) => {
     remove(id);
@@ -57,17 +61,23 @@ function App() {
     }
   }
   return (
-    <div className="App">
+    <>
+      <div>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="App.css" />
+      </div>
       <main>
         <Routes>
+          <Route path="signup" element={<Signup onAdd={onHandleAddUser} />} />
+          <Route path="signin" element={<Signin />} />
           <Route path="/" element={<WebsiteLayout />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePage products={products} />} />
             <Route path="product">
               <Route index element={<ProductPage />} />
               <Route path=":id" element={<ProductDetail />} />
             </Route>
-            <Route path="signup" element={<Signup onAdd={onHandleAddUser} />} />
-            <Route path="signin" element={<Signin />} />
           </Route>'
           <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
             <Route index element={<Navigate to="dashboard" />} />
@@ -77,10 +87,12 @@ function App() {
               <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
               <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
             </Route>
+            <Route path="user">
+              <Route index element={<UserManager users={users} onRemove={onHandleRemoveUser} />} />
+            </Route>
           </Route>
         </Routes>
-      </main>
-    </div>
+      </main></>
   )
 }
 

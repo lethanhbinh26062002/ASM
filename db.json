@@ -2,7 +2,7 @@
   "products": [
     {
       "name": "Product A",
-      "price": "10",
+      "price": "25",
       "id": 2,
       "description": "Mô tả sản phẩm B"
     },

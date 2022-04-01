@@ -23,11 +23,7 @@ const Signin = (props: Props) => {
                 <a className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN IN</a>
               </div>
               <div className="my-2 d-flex justify-content-between align-items-center">
-                <div className="form-check">
-                  <label className="form-check-label text-muted">
-                    <input type="checkbox" className="form-check-input" /> Keep me signed in </label>
-                </div>
-                <a href="#" className="auth-link text-black">Forgot password?</a>
+
               </div>
               <div className="mb-2">
               </div>

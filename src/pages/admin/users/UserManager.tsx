@@ -1,40 +1,38 @@
 import { Link } from 'react-router-dom';
-import { ProductType } from '../../../types/product';
+import { UserType } from '../../../types/User';
 
-type ProductManagerProps = {
-  products: ProductType[];
+type UserManagerProps = {
+  users: UserType[];
   onRemove: (id: number) => void
 }
 
-const ProductManager = (props: ProductManagerProps) => {
+const UserManager = (props: UserManagerProps) => {
   return (
     <><div className="col-lg-12 stretch-card">
       <div className="card">
         <div className="card-body">
-          <h4 className="card-title">List Product</h4>
+          <h4 className="card-title">List User</h4>
           <button type="button" className="ml-0 btn btn-inverse-success btn-fw">
-            <Link to={`/admin/product/add`}>Add Product</Link>
+            <Link to={`/admin/user/add`}>Add User</Link>
           </button>
           <table className="table table-bordered">
             <thead>
               <tr>
                 <th> # </th>
-                <th> Product name </th>
-                <th> Price </th>
-                <th> Description </th>
+                <th> Name</th>
+                <th> Email </th>
                 <th> Edit </th>
               </tr>
             </thead>
             <tbody>
-              {props.products.map((item, index) => {
+              {props.users.map((item, index) => {
                 return <tr className="table-info">
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  <td>{item.price} USD</td>
-                  <td>{item.description}</td>
+                  <td>{item.email} </td>
                   <td>
                     <button type="button" className="btn btn-inverse-dark btn-fw">
-                      <Link to={`/admin/product/${item.id}/edit`}>Edit</Link>
+                      <Link to={`/admin/user/${item.id}/edit`}>Edit</Link>
                     </button>
                     <span>                                                </span>
                     <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item.id)}>Remove</button>
@@ -50,4 +48,4 @@ const ProductManager = (props: ProductManagerProps) => {
   )
 }
 
-export default ProductManager
+export default UserManager
