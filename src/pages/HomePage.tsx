@@ -41,7 +41,7 @@ const HomePage = (props: Props) => {
               <div className="card-body">
                 <Link to={`/product/${item._id}`}>
                   <h5 className="card-title">{item.name}</h5>
-                  <p className="card-text">{item.price}</p>
+                  <p className="card-text">{item.price} USD</p>
                 </Link>
               </div>
               <div className="card-footer">

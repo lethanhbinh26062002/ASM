@@ -19,6 +19,7 @@ import { UserType } from './types/User';
 import { signup, removeUser } from './api/user';
 import Signin from './pages/Signin';
 import UserManager from './pages/admin/users/UserManager';
+import { toast } from 'react-toastify';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -32,12 +33,13 @@ function App() {
     getProducts();
   }, []);
   //User
-  const onHandleAddUser = async (user: any) => {
-    const { data } = await signup(user);
-    setUsers([...users, data]);
-  }
+  // const onHandleAddUser = async (user: any) => {
+  //   const { data } = await signup(user);
+  //   setUsers([...users, data]);
+  // }
   const onHandleRemoveUser = async (id: number) => {
     removeUser(id);
+
   }
   // Add Product
   const onHandleAdd = async (product: any) => {
@@ -45,10 +47,12 @@ function App() {
     // const UserId = userLocal.user._id;
     // console.log(UserId);
     const { data } = await add(product);
+    toast.success("Thêm sản phẩm thành công");
     setProducts([...products, data]);
   }
-  const onHandleRemove = async (_id: number|string) => {
+  const onHandleRemove = async (_id: number | string) => {
     remove(_id);
+    toast.success("Xóa sản phẩm thành công");
     console.log(_id);
     // rerender
     setProducts(products.filter(item => item._id !== _id));
@@ -57,7 +61,7 @@ function App() {
     try {
       // api
       const { data } = await update(product);
-      // reREnder - 
+      toast.success("Update sản phẩm thành công");
       // Tạo ra 1 vòng lặp, nếu item.id == id sản phẩm vừa cập nhật (data), thì cập nhật ngược lại giữ nguyên
       setProducts(products.map(item => item._id === data._id ? product : item))
     } catch (error) {
@@ -96,7 +100,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
-      </main></>
+      </main>
+    </> 
   )
 }
 
