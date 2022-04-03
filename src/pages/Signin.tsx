@@ -1,7 +1,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signin } from '../api/user';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -24,13 +24,14 @@ const Signin = () => {
     }
   }
   return (
-    
     <div className="container-scroller">
+
       <div className="container-fluid page-body-wrapper full-page-wrapper">
         <div className="content-wrapper d-flex align-items-center auth">
           <div className="row flex-grow">
             <div className="col-lg-4 mx-auto">
               <div className="auth-form-light text-left p-5">
+                <ToastContainer />
                 <h4>Hello! let's get started</h4>
                 <h6 className="font-weight-light">Sign in to continue.</h6>
                 <form className="pt-3" onSubmit={handleSubmit(onSumbit)}>
