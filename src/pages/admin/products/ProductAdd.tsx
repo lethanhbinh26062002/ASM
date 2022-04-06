@@ -28,7 +28,10 @@ const ProductAdd = (props: ProductAddProps) => {
       }
     )
     const file = await res.json()
+    const url = file.secure_url
+    console.log(url);
     setImage(file.secure_url)
+    console.log(image);
     setLoading(false)
   }
   const onSubmit: SubmitHandler<Inputs> = (dataInput) => {
@@ -47,23 +50,27 @@ const ProductAdd = (props: ProductAddProps) => {
               <div className="text-left form-group">
                 <label>Name</label>
                 <input type="text" {...register('name')} className="form-control" placeholder="Name" />
+                {errors.name && <span className="text-base badge badge-warning">Nhập tên sản phẩm</span>}
               </div>
               <div className="text-left form-group">
                 <label>Price</label>
                 <input type="number" {...register('price')} className="form-control" placeholder="Price" />
+                {errors.price && <span className="text-base badge badge-warning">Nhập giá sản phẩm</span>}
               </div>
               <div className="form-group">
                 <label>File upload</label>
                 <br />
                 <input type="file" onChange={uploadImage} className="file-upload-browse btn btn-gradient-primary" />
-                <input type="text" {...register('img')} defaultValue={image}/>
+                <input type="text" {...register('img')} value={image} />
                 <div>
                   {loading ? <p>Loading...</p> : <img src={image} style={{ width: '300px' }} />}
                 </div>
+                {errors.img && <span className="text-base badge badge-warning">Thêm ảnh sản phẩm</span>}
               </div>
               <div className="text-left form-group">
                 <label>Description</label>
                 <textarea className="form-control" {...register('description')} rows={8} />
+                {errors.description && <span className="text-base badge badge-warning">Nhập mô tả sản phẩm</span>}
               </div>
               <button className="text-left btn btn-gradient-primary mr-2">Add product</button>
             </form>

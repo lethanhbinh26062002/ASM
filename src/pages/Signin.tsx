@@ -15,13 +15,8 @@ const Signin = () => {
 
   const onSumbit: SubmitHandler<FormInputs> = async (user) => {
     const { data } = await signin(user);
-    if (data) {
-      toast.success("Bạn đã đăng nhập thành công, chờ 3s");
-      setTimeout(() => {
-        navigate('/')
-        localStorage.setItem("user", JSON.stringify(data))
-      }, 3000)
-    }
+    navigate('/')
+    localStorage.setItem("user", JSON.stringify(data))
   }
   return (
     <div className="container-scroller">
@@ -40,7 +35,7 @@ const Signin = () => {
                     <input type="email" {...register('email', { required: true })} className="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" />
                   </div>
                   <div className="form-group">
-                    {errors.password && <span className="text-base badge badge-warning">Nhập email</span>}
+                    {errors.password && <span className="text-base badge badge-warning">Nhập password</span>}
                     <input type="password" {...register('password', { required: true })} className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" />
                   </div>
                   <div className="mt-3">

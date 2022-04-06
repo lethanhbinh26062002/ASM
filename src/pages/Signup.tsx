@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, Link } from 'react-router-dom';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { signup } from '../api/user';
 
 type Inputs = {
@@ -15,12 +15,7 @@ const Signup = () => {
   const navigate = useNavigate()
   const onSumbit: SubmitHandler<Inputs> = async (user) => {
     const { data } = await signup(user);
-    if (data) {
-      toast.success("Bạn đã đăng ký thành công, chờ 3s");
-      setTimeout(() => {
-        navigate('/signin')
-      }, 3000)
-    }
+    navigate('/signin')
   }
   return (
     <><div className="container-scroller">
@@ -33,13 +28,16 @@ const Signup = () => {
                 <h6 className="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                 <form className="pt-3" action="" onSubmit={handleSubmit(onSumbit)}>
                   <div className="form-group">
-                    <input type="text" {...register('name')} className="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" />
+                    {errors.name && <span className="text-base badge badge-warning">Nhập name</span>}
+                    <input type="text" {...register('name', { required: true })} className="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" />
                   </div>
                   <div className="form-group">
-                    <input type="email" {...register('email')} className="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" />
+                    {errors.email && <span className="text-base badge badge-warning">Nhập email</span>}
+                    <input type="email" {...register('email', { required: true })} className="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" />
                   </div>
                   <div className="form-group">
-                    <input type="password" {...register('password')} className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" />
+                    {errors.password && <span className="text-base badge badge-warning">Nhập password</span>}
+                    <input type="password" {...register('password', { required: true })} className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" />
                   </div>
                   <div className="mb-4">
                     <div className="form-check">

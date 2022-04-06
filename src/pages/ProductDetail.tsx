@@ -15,12 +15,14 @@ const ProductDetail = (props: Props) => {
     }
     getProduct();
   }, [id])
+  
   return (
     <>
       <div><img src="https://media3.scdn.vn/img4/2021/04_01/KSFnjFifYLiUGe8sGQdZ.jpg" className="card-img-top" style={{width: 350}} alt="" /></div>
-      <div>{product?.name}</div>
-      <div>{product?.price}</div>
-      <div>{product?.description}</div>
+      <div><span>Tên sản phẩm : </span>{product?.name}</div>
+      <div><span>Giá : </span>{product?.price}</div>
+      <div><span>Mô tả </span>{product?.description}</div>
+      <div><button className="text-left btn btn-gradient-primary mr-2">Add to card</button></div>
     </>
   )
 }

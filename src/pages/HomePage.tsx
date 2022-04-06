@@ -30,7 +30,6 @@ const HomePage = (props: Props) => {
     </div>
     <p style={{marginTop: 35}} />
 
-
     <div className="row row-cols-1 row-cols-md-4 g-4 mt-10">
         {props.products.map((item) => {
           return <div className="col">

@@ -95,6 +95,9 @@ function App() {
               <Route path=":userId/:id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
               <Route path=":userId" element={<ProductAdd onAdd={onHandleAdd} />} />
             </Route>
+            {/* <Route path="users">
+              <Route index element={<UserManager users={users} onRemove={}/>} />
+            </Route> */}
             <Route path="user">
               <Route index element={<UserManager users={users} onRemove={onHandleRemoveUser} />} />
             </Route>

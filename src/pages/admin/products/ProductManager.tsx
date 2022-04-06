@@ -24,6 +24,7 @@ const ProductManager = (props: ProductManagerProps) => {
             <thead>
               <tr>
                 <th> # </th>
+                <th> Image </th>
                 <th> Product name </th>
                 <th> Price </th>
                 <th> Description </th>
@@ -34,6 +35,7 @@ const ProductManager = (props: ProductManagerProps) => {
               {props.products.map((item, index) => {
                 return <tr className="table">
                   <td>{index + 1}</td>
+                  <td><img src={item.img} style={{ width: '300px', height: '300px' }} /></td>
                   <td>{item.name}</td>
                   <td>{item.price} USD</td>
                   <td>{item.description}</td>
