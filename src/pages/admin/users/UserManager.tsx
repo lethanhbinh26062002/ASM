@@ -5,7 +5,7 @@ type UserManagerProps = {
   users: UserType[];
   onRemove: (_id: number) => void
 }
-
+const userLocal = JSON.parse(localStorage.getItem("user") as string);
 const UserManager = (props: UserManagerProps) => {
   return (
     <><div className="col-lg-12 stretch-card">
@@ -13,7 +13,7 @@ const UserManager = (props: UserManagerProps) => {
         <div className="card-body">
           <h4 className="card-title">List User</h4>
           <button type="button" className="ml-0 btn btn-inverse-success btn-fw">
-            <Link to={`/admin/user/add`}>Add User</Link>
+            <Link to={`/admin/user/${userLocal.user._id}`}>Add User</Link>
           </button>
           <table className="table table-bordered">
             <thead>
@@ -25,20 +25,21 @@ const UserManager = (props: UserManagerProps) => {
               </tr>
             </thead>
             <tbody>
-              {props.users.map((item, index) => {
-                return <tr className="table-info">
+              {props.users.map((u, index) => {
+                return <tr>
                   <td>{index + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.email} </td>
+                  <td>{u.name}</td>
+                  <td>{u.email}</td>
                   <td>
                     <button type="button" className="btn btn-inverse-dark btn-fw">
-                      <Link to={`/admin/user/${item._id}/edit`}>Edit</Link>
+                      <Link to={`/admin/users/${u._id}/edit`}>Edit</Link>
                     </button>
                     <span>                                                </span>
-                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(item._id)}>Remove</button>
+                    <button type="button" className="btn btn-inverse-danger btn-fw" onClick={() => props.onRemove(u._id)}>Remove</button>
                   </td>
                 </tr>;
               })}
+
             </tbody>
           </table>
         </div>

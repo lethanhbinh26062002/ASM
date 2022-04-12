@@ -20,6 +20,7 @@ import { signup, removeUser } from './api/user';
 import Signin from './pages/Signin';
 import UserManager from './pages/admin/users/UserManager';
 import { toast } from 'react-toastify';
+import Search from './pages/Search';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -80,8 +81,9 @@ function App() {
         <Routes>
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
-          <Route path="/" element={<WebsiteLayout />}>
+          <Route path="/" element={<WebsiteLayout name={''} />}>
             <Route index element={<HomePage products={products} />} />
+            <Route path="search" element={<Search products={products} />} />
             <Route path="product">
               <Route index element={<ProductPage products={products} />} />
               <Route path=":id" element={<ProductDetail />} />
@@ -90,16 +92,15 @@ function App() {
           <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users">
+              <Route index element={<UserManager onRemove={onHandleRemoveUser} users={users} />} />
+              {/* <Route path=":userId/:id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
+              <Route path=":userId" element={<ProductAdd onAdd={onHandleAdd} />} /> */}
+            </Route>
             <Route path="products">
               <Route index element={<ProductManager products={products} onRemove={onHandleRemove} />} />
               <Route path=":userId/:id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
               <Route path=":userId" element={<ProductAdd onAdd={onHandleAdd} />} />
-            </Route>
-            {/* <Route path="users">
-              <Route index element={<UserManager users={users} onRemove={}/>} />
-            </Route> */}
-            <Route path="user">
-              <Route index element={<UserManager users={users} onRemove={onHandleRemoveUser} />} />
             </Route>
           </Route>
         </Routes>

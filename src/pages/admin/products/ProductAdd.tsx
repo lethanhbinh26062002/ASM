@@ -81,7 +81,5 @@ const ProductAdd = (props: ProductAddProps) => {
 }
 
 export default ProductAdd
-function usestate(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}
+
 

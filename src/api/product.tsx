@@ -26,6 +26,14 @@ export const read = (_id: any) => {
     const url = `/products/${_id}`;
     return instance.get(url);
 }
+export const search = (search: any) => {
+    const url = `/search?q=${search}`;
+    return instance.post(url)
+}
+export const productSearch = (search: any) => {
+    const url = `/search?q=${search}`;
+    return instance.post(url)
+}
 export const update = (product: any) => {
     const url = `/products/${user?.user._id}/${product._id}/edit`;
     return instance.put(url, product,{
